@@ -8,7 +8,6 @@ def index(request):
     return render(request,"index.html")
 
 
-
 def home(request):
     officeForm=OfficeForm()
     employeeForm=EmployeeForm()
@@ -35,13 +34,11 @@ def employee(request):
         employeeForm=EmployeeForm(request.POST)
         employee=employeeForm.save()
         office=employee.office
-       #print("of",office)
         officeJson=model_to_dict(office)
         response=model_to_dict(employee)
-       #print(response['office'])
         response['office'] = officeJson
-       #print(response['office'])
         return JsonResponse (response)
+
     elif request.method == 'PUT':
         data= json.loads(request.body)
         data['office'] = Office(id=data.get('office'))
